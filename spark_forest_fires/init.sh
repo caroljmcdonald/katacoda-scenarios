@@ -27,11 +27,11 @@ wget -P /root https://raw.githubusercontent.com/mapr-demos/katacoda-scenarios/ma
 curl -X POST http://localhost:7000/api/notebook/import -d @"/root/Forest Fire Prediction.json"
 
 # create streams
-maprcli stream create -path /user/mapr/ml_input -produceperm p -consumeperm p -topicperm p -ttl 604800
-maprcli stream topic create -path /user/mapr/ml_input -topic requester001
+#maprcli stream create -path /user/mapr/ml_input -produceperm p -consumeperm p -topicperm p -ttl 604800
+#maprcli stream topic create -path /user/mapr/ml_input -topic requester001
 # ttl 604800 is 1 week
-maprcli stream create -path /user/mapr/ml_output -produceperm p -consumeperm p -topicperm p -ttl 604800
-maprcli stream topic create -path /user/mapr/ml_output -topic kmeans001
+#maprcli stream create -path /user/mapr/ml_output -produceperm p -consumeperm p -topicperm p -ttl 604800
+#maprcli stream topic create -path /user/mapr/ml_output -topic kmeans001
 
 # Copy the pre-built kmeans model:
 mkdir /mapr/demo.mapr.com/user/mapr/data
