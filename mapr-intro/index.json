@@ -1,6 +1,6 @@
 {
-    "pathwayTitle": "Intro to MapR",
-    "title": "Introduction to MapR",
+    "pathwayTitle": "Intro to MapR 6.1",
+    "title": "Beta 6.1 Introduction to MapR using Flight Dataset",
     "description": "Illustrates how to use managing files, tables, and streams in the MapR data platform.",
     "difficulty": "beginner",
     "time": "15 minutes",
@@ -49,7 +49,7 @@
         "uimessage1": "\u001b[32mYour Interactive Bash Terminal. A safe place to learn and execute commands.\u001b[m\r\n"
     },
     "backend": {
-        "imageid": "mapr",
+        "imageid": "mapr61",
         "port": 8443
     }
 }

@@ -5,29 +5,50 @@ The ability to treat MapR XD like a conventional Unix filesystem and still benef
 
 ## Working with Files
 
-You can access MapR XD using the [HDFS protocol](https://mapr.com/docs/61/AdministratorGuide/hdfs.html). Give it a try! Copy a file into MapR XD using HDFS, like this: `hadoop fs -put yelp_academic_dataset_business.json /tmp`{{execute}}
-
-List the file you created. `hadoop fs -ls /tmp`{{execute}}
+You can access MapR XD using the [HDFS protocol](https://mapr.com/docs/61/AdministratorGuide/hdfs.html). Give it a try! List the directories on MapR XD using HDFS, like this: `hadoop fs -ls /`{{execute}}
 
 Although you *can* use the `hadoop` command for file operations, it's much easier to interact with MapR XD using traditional filesystem commands instead. This is possible because MapR XD is POSIX compliant, which means files and directories in MapR XD have all the characteristics you're accustomed to seeing in conventional filesystems. So, you can edit files, move files, change permissions, and so on all with traditional utilities like, `vi`, `mv`, `chmod`, etc. Try it!
 
-Copy a file from the local Linux filesystem to MapR XD: `cp ~/yelp_academic_dataset_tip.json /mapr/demo.mapr.com/tmp`{{execute}}
+MapR exports each cluster as the directory /mapr/clustername
 
-List the files you copied: `ls -l /mapr/demo.mapr.com/tmp`{{execute}} 
+List the clustername directory on MapR XD, like this: `ls /mapr`{{execute}}
 
-Change permissions of a file: `chmod 600 /mapr/demo.mapr.com/tmp/yelp_academic_dataset_business.json`{{execute}}
+List the directories on MapR XD, like this: `ls /mapr/demo.mapr.com/`{{execute}}
 
-View the new permissions: `ls -l /mapr/demo.mapr.com/tmp/`{{execute}}
+Make a directory for data on MapR XD: `mkdir /mapr/demo.mapr.com/user/mapr/data`{{execute}}
+
+Copy flight data file from the local Linux filesystem to MapR XD: `cp ~/flightdata2018.json.gz /mapr/demo.mapr.com/user/mapr/data/.`{{execute}}
+
+Copy airports data file from the local Linux filesystem to MapR XD: `cp ~/airports.json /mapr/demo.mapr.com/user/mapr/data/.`{{execute}}
+
+Unzip the flights data file on MapR XD:
+`gunzip /mapr/demo.mapr.com/user/mapr/data/flightdata2018.json.gz`{{execute}}
+
+List the files you copied: `ls -l /mapr/demo.mapr.com/user/mapr/data`{{execute}} 
+
+Look at the end of the flights data file on MapR XD:
+`tail /mapr/demo.mapr.com/user/mapr/data/flightdata2018.json`{{execute}}
+
+Look at the end of the airports data file on MapR XD:
+`tail /mapr/demo.mapr.com/user/mapr/data/airports.json`{{execute}}
+
+Change permissions of a file: `chmod 600 /mapr/demo.mapr.com/user/mapr/data/flightdata2018.json`{{execute}}
+
+View the new permissions: `ls -l /mapr/demo.mapr.com/user/mapr/data`{{execute}}
 
 ## Real File Semantics
 
-Files can be edited. For example, replace "Hofbräu" with "Hofbrau" using an in-place substitution: `sed -i.bak 's/Hofbrau/Hofbräu/g' /mapr/demo.mapr.com/tmp/yelp_academic_dataset_business.json`{{execute}}
+Files can be edited. For example, replace "NJ" with "New Jersey" using an in-place substitution: `sed -i.bak 's/NJ/New Jersey/g' /mapr/demo.mapr.com/user/mapr/data/airports.json`{{execute}}
 
-Files have regular attributes: `stat /mapr/demo.mapr.com/tmp/yelp_academic_dataset_business.json`{{execute}}
+View change in airports data file on MapR XD:
+`cat /mapr/demo.mapr.com/user/mapr/data/airports.json`{{execute}}
+
+Files have regular attributes: `stat /mapr/demo.mapr.com/user/mapr/data/airports.json`{{execute}}
 
 File changes can also be seen in real time. Try continuously changing a file, like this: `while true; do date; sleep 1; done > /mapr/demo.mapr.com/tmp/timestamps`{{execute}}
 
 Then tail that file in another terminal to see those changes in real time. `tail -f /mapr/demo.mapr.com/tmp/timestamps`{{execute T2}}
+(Click on the Terminal 2 tab to see this)
 
 Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the while loop. `echo "Ctrl+C"`{{execute interrupt}}
 
