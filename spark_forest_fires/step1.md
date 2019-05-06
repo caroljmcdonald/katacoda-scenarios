@@ -12,7 +12,7 @@ The Zeppelin notebook trains a kmeans model for fire prediction.
 A pre-built kmeans model has been included so you don't have to run the entire Zeppelin notebook. If you want to use the pre-built model to demonstrate kmeans on streaming data, do this:
 
 1. Run the Spark ML job which applies kmeans on a stream of lat,long coordinates. This represents a service that listens for fires (the lat/long) and assigns a cluster id (i.e. "fire station") to respond to that fire:
-`/opt/mapr/spark/spark-2.3.1/bin/spark-submit --class com.sparkkafka.fire.SparkKafkaConsumerProducer --master local[2] /root/mapr-sparkml-streaming-fires-1.0-jar-with-dependencies.jar /mapr/demo.mapr.com/user/mapr/data/save_fire_model-cascadia  /user/mapr/ml_input:requester001 /user/mapr/ml_output:kmeans001`{{execute}}
+`/opt/mapr/spark/spark-*/bin/spark-submit --class com.sparkkafka.fire.SparkKafkaConsumerProducer --master local[2] /root/mapr-sparkml-streaming-fires-1.0-jar-with-dependencies.jar /mapr/demo.mapr.com/user/mapr/data/save_fire_model-cascadia  /user/mapr/ml_input:requester001 /user/mapr/ml_output:kmeans001`{{execute}}
 2. Open the KMeans Input window and enter a lat,long value (e.g: 42.988,-121.272). This represents the location for a new fire. 
 3. Open the KMeans Output window to see the cluster id (i.e. “fire station”) which the model has assigned to respond to that fire.
 
